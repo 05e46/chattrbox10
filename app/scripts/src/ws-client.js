@@ -20,6 +20,13 @@ function registerMessageHandler(handlerFunction){
   };
 }
 
+function sendMessage(payload){
+  socket.send(JSON.stringify(payload));
+}
+
 export default{
   init,
+  registerOpenHandler,
+  registerMessageHandler,
+  sendMessage
 }

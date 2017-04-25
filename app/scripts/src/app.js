@@ -1,7 +1,20 @@
-import socket from'./ws-client.js';
+import socket from'./ws-client';
+import {ChatForm} from './dom';
+
+const Form_selector= '[data-chat="chat-form"]';
+const Input_selector = '[data-chat="message-input"]';
+
 class ChatApp{
   constructor(){
+    this.chatForm = new ChatForm(Form_selector,Input_selector);
     socket.init('ws://localhost:3001');
+    socket.registerOpenHandler(()=>{
+      let message = new ChatMessage({message: 'test'});
+      socket.sendMessage(message.serialize());
+    });
+    socket.registerMessageHandler((data)=>{
+      console.log(data);
+    });
   }
 }
 
