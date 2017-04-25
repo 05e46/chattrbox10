@@ -9,8 +9,10 @@ class ChatApp{
     this.chatForm = new ChatForm(Form_selector,Input_selector);
     socket.init('ws://localhost:3001');
     socket.registerOpenHandler(()=>{
-      let message = new ChatMessage({message: 'test'});
-      socket.sendMessage(message.serialize());
+      this.chatForm.init(data)=>{
+        let message = new ChatMessage(data);
+        socket.sendMessage(message.serialize());
+      });
     });
     socket.registerMessageHandler((data)=>{
       console.log(data);
