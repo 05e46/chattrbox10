@@ -1,40 +1,33 @@
-import socket from'./ws-client';
-import {ChatForm} from './dom';
+import socket from './ws-client';
 
-const Form_selector= '[data-chat="chat-form"]';
-const Input_selector = '[data-chat="message-input"]';
-
-class ChatApp{
-  constructor(){
-    this.chatForm = new ChatForm(Form_selector,Input_selector);
+class ChatApp {
+  constructor() {
     socket.init('ws://localhost:3001');
-    socket.registerOpenHandler(()=>{
-      this.chatForm.init(data)=>{
-        let message = new ChatMessage(data);
-        socket.sendMessage(message.serialize());
-      });
+    socket.registerOpenHandler(() => {
+      let message = new ChatMessage({ message: 'pow!' });
+      socket.sendMessage(message.serialize());
     });
-    socket.registerMessageHandler((data)=>{
+    socket.registerMessageHandler((data) => {
       console.log(data);
     });
   }
 }
 
-class ChatMessage(){
-  constructor(){
+class ChatMessage {
+  constructor({
     message: m,
-    user: u='batman',
-    timestamp: t=(new Date()).getTime()
-  }){
+    user: u = 'wonderwoman',
+    timestamp: t = (new Date()).getTime()
+  }) {
     this.message = m;
     this.user = u;
-    this.timeStamp = t;
+    this.timestamp = t;
   }
-  serialize(){
+  serialize() {
     return {
       user: this.user,
       message: this.message,
-      timestamp: this.timeStamp
+      timestamp: this.timestamp
     };
   }
 }
