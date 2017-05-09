@@ -10,7 +10,7 @@
         ],
         "linebreak-style": [
             "error",
-            "windows"
+            "unix"
         ],
         "quotes": [
             "error",
@@ -20,9 +20,4 @@
             "error",
             "always"
         ],
-
-        "no-unsed-vars": 0,
-        "no-undef": 0,
-        "no-console": 0,
-    }
 }
